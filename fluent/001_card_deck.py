@@ -44,5 +44,16 @@ def main():
     print(Card('Q', 'hearts') in deck)
     print(Card('7', 'beasts') in deck)
 
+    # sort by rank, then by spades > hearts > diamonds > clubs
+    suit_values = dict(spades=3, hearts=2, diamonds=1, clubs=0)
+
+    def spades_high(card):
+        rank_value = FrenchDeck.ranks.index(card.rank)
+        return rank_value * len(suit_values) + suit_values[card.suit]
+
+    # use spades_high's return value to tell which is smaller
+    for card in sorted(deck, key=spades_high):
+        print(card)
+
 if __name__ == '__main__':
     main()
